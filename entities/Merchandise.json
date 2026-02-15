@@ -1,0 +1,41 @@
+{
+    "name": "Merchandise",
+    "type": "object",
+    "properties": {
+        "creator_id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "price": {
+            "type": "number"
+        },
+        "image_url": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "merch",
+                "event_ticket"
+            ]
+        },
+        "stock": {
+            "type": "number"
+        },
+        "is_available": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "required": [
+        "creator_id",
+        "name",
+        "price",
+        "type"
+    ]
+}

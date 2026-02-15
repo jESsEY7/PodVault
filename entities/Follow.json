@@ -1,0 +1,24 @@
+{
+    "name": "Follow",
+    "type": "object",
+    "properties": {
+        "target_id": {
+            "type": "string",
+            "description": "Creator or Podcast ID"
+        },
+        "target_type": {
+            "type": "string",
+            "enum": [
+                "creator",
+                "podcast"
+            ]
+        },
+        "target_name": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "target_id",
+        "target_type"
+    ]
+}

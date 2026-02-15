@@ -1,0 +1,35 @@
+{
+    "name": "Comment",
+    "type": "object",
+    "properties": {
+        "episode_id": {
+            "type": "string",
+            "description": "Episode being commented on"
+        },
+        "user_name": {
+            "type": "string"
+        },
+        "user_avatar": {
+            "type": "string"
+        },
+        "content": {
+            "type": "string"
+        },
+        "timestamp_seconds": {
+            "type": "number",
+            "description": "Timestamp in episode if applicable"
+        },
+        "likes": {
+            "type": "number",
+            "default": 0
+        },
+        "parent_comment_id": {
+            "type": "string",
+            "description": "For nested replies"
+        }
+    },
+    "required": [
+        "episode_id",
+        "content"
+    ]
+}

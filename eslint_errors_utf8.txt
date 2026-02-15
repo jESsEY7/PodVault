@@ -1,0 +1,195 @@
+﻿
+C:\Users\admin\Documents\Jesse\podvault\src\App.jsx
+  13:53  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\clips\ClipGenerator.jsx
+  5:37  error  'Download' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\creator\SubscriptionTiers.jsx
+  4:10  error  'Switch' is defined but never used  unused-imports/no-unused-imports
+  5:10  error  'Label' is defined but never used   unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\CategoryPills.jsx
+  2:10  error  'motion' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\FeaturedCarousel.jsx
+  4:10  error  'Link' is defined but never used           unused-imports/no-unused-imports
+  5:10  error  'createPageUrl' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\HeroSection.jsx
+  1:17  error  'useEffect' is defined but never used  unused-imports/no-unused-imports
+  1:36  error  'useState' is defined but never used   unused-imports/no-unused-imports
+  3:16  error  'Volume2' is defined but never used    unused-imports/no-unused-imports
+  3:25  error  'VolumeX' is defined but never used    unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\TrendingSection.jsx
+  2:10  error  'motion' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\navigation\FloatingNav.jsx
+  4:25  error  'Library' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\accordion.jsx
+  10:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\alert-dialog.jsx
+  14:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\alert.jsx
+  23:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\avatar.jsx
+  9:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\badge.jsx
+  31:13  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\breadcrumb.jsx
+  8:28  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\button.jsx
+  40:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\calendar.jsx
+  15:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\carousel.jsx
+  89:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\chart.jsx
+  30:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\checkbox.jsx
+  8:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\command.jsx
+  9:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\context-menu.jsx
+  20:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\dialog.jsx
+  18:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\drawer.jsx
+  12:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\dropdown-menu.jsx
+  20:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\form.jsx
+  19:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\hover-card.jsx
+  13:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\input-otp.jsx
+  8:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\input.jsx
+  7:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\label.jsx
+  12:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\menubar.jsx
+  12:12  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\navigation-menu.jsx
+  9:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\pagination.jsx
+  11:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\popover.jsx
+  13:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\radio-group.jsx
+  8:13  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\resizable.jsx
+  12:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\scroll-area.jsx
+  7:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\select.jsx
+  16:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\separator.jsx
+  10:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\sheet.jsx
+  18:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\sidebar.jsx
+  107:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\skeleton.jsx
+  8:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\slider.jsx
+  7:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\sonner.jsx
+  11:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\switch.jsx
+  7:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\table.jsx
+  6:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\tabs.jsx
+  9:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\textarea.jsx
+  7:10  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\toast.jsx
+  7:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\toaster.jsx
+  15:9  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\toggle-group.jsx
+  14:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\toggle.jsx
+  30:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\tooltip.jsx
+  15:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\lib\AuthContext.jsx
+  75:9  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\lib\PageNotFound.jsx
+  23:9  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\main.jsx
+  7:5  error  Parsing error: Unexpected token <
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\CreatorAnalytics.jsx
+  4:101  error  'PieChart' is defined but never used     unused-imports/no-unused-imports
+  4:111  error  'Pie' is defined but never used          unused-imports/no-unused-imports
+  4:116  error  'Cell' is defined but never used         unused-imports/no-unused-imports
+  5:68   error  'ChevronDown' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\EpisodePlayer.jsx
+   5:57  error  'Volume2' is defined but never used          unused-imports/no-unused-imports
+  11:8   error  'EpisodeFeedback' is defined but never used  unused-imports/no-unused-imports
+  13:10  error  'Button' is defined but never used           unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\GroupSession.jsx
+  6:10  error  'Textarea' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\Search.jsx
+  8:10  error  'Input' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\Settings.jsx
+  2:10  error  'useQuery' is defined but never used  unused-imports/no-unused-imports
+  5:10  error  'Switch' is defined but never used    unused-imports/no-unused-imports
+
+Γ£û 71 problems (71 errors, 0 warnings)
+  23 errors and 0 warnings potentially fixable with the `--fix` option.
+

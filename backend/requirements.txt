@@ -1,0 +1,12 @@
+Django>=5.0
+djangorestframework
+django-cors-headers
+Pillow
+python-dotenv
+requests
+feedparser
+celery
+redis
+django-celery-results
+python-dotenv
+openai

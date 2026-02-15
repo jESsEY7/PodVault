@@ -1,0 +1,39 @@
+{
+    "name": "UserActivity",
+    "type": "object",
+    "properties": {
+        "episode_id": {
+            "type": "string"
+        },
+        "podcast_id": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string",
+            "enum": [
+                "play",
+                "complete",
+                "skip",
+                "save",
+                "like"
+            ]
+        },
+        "progress_seconds": {
+            "type": "number"
+        },
+        "duration_seconds": {
+            "type": "number"
+        },
+        "completion_percentage": {
+            "type": "number"
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "required": [
+        "episode_id",
+        "action"
+    ]
+}

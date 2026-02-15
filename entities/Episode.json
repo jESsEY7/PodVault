@@ -1,0 +1,74 @@
+{
+    "name": "Episode",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Episode title"
+        },
+        "description": {
+            "type": "string",
+            "description": "Episode description"
+        },
+        "podcast_id": {
+            "type": "string",
+            "description": "Reference to parent podcast"
+        },
+        "podcast_title": {
+            "type": "string",
+            "description": "Parent podcast title for display"
+        },
+        "audio_url": {
+            "type": "string",
+            "description": "Audio file URL"
+        },
+        "cover_image": {
+            "type": "string",
+            "description": "Episode cover image URL"
+        },
+        "duration_minutes": {
+            "type": "number",
+            "description": "Duration in minutes"
+        },
+        "season": {
+            "type": "number"
+        },
+        "episode_number": {
+            "type": "number"
+        },
+        "publish_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "likes": {
+            "type": "number",
+            "default": 0
+        },
+        "plays": {
+            "type": "number",
+            "default": 0
+        },
+        "tier": {
+            "type": "string",
+            "enum": [
+                "free",
+                "premium"
+            ],
+            "default": "free"
+        },
+        "transcript_summary": {
+            "type": "string",
+            "description": "AI-generated summary of the episode"
+        }
+    },
+    "required": [
+        "title",
+        "podcast_id"
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "CreatorSubscription",
+    "type": "object",
+    "properties": {
+        "creator_id": {
+            "type": "string"
+        },
+        "tier_name": {
+            "type": "string",
+            "enum": [
+                "basic",
+                "pro",
+                "premium"
+            ]
+        },
+        "price_monthly": {
+            "type": "number"
+        },
+        "benefits": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "subscriber_count": {
+            "type": "number",
+            "default": 0
+        }
+    },
+    "required": [
+        "creator_id",
+        "tier_name",
+        "price_monthly"
+    ]
+}

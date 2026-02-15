@@ -1,0 +1,13 @@
+﻿
+C:\Users\admin\Documents\Jesse\podvault\src\lib\PageNotFound.jsx
+   6:38  error  Unexpected empty object pattern                                  no-empty-pattern
+  38:83  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  38:94  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  52:73  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\Search.jsx
+  123:93   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  123:101  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+Γ£û 6 problems (6 errors, 0 warnings)
+

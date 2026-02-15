@@ -1,0 +1,34 @@
+{
+    "name": "Playlist",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Playlist name"
+        },
+        "description": {
+            "type": "string"
+        },
+        "cover_image": {
+            "type": "string"
+        },
+        "is_public": {
+            "type": "boolean",
+            "default": true
+        },
+        "episode_ids": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Array of episode IDs"
+        },
+        "follower_count": {
+            "type": "number",
+            "default": 0
+        }
+    },
+    "required": [
+        "name"
+    ]
+}

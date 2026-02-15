@@ -1,0 +1,48 @@
+{
+    "name": "UserPreference",
+    "type": "object",
+    "properties": {
+        "episode_id": {
+            "type": "string",
+            "description": "Episode being rated"
+        },
+        "podcast_id": {
+            "type": "string"
+        },
+        "feedback_type": {
+            "type": "string",
+            "enum": [
+                "like",
+                "dislike",
+                "not_interested"
+            ],
+            "description": "User's explicit feedback"
+        },
+        "topics_to_avoid": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Topics user marked as not interested"
+        },
+        "preferred_duration": {
+            "type": "string",
+            "enum": [
+                "short",
+                "medium",
+                "long",
+                "any"
+            ],
+            "default": "any"
+        },
+        "preferred_categories": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "feedback_type"
+    ]
+}

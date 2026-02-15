@@ -1,0 +1,65 @@
+﻿
+C:\Users\admin\Documents\Jesse\podvault\src\App.jsx
+  1:17  error  'useEffect' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\clips\ClipGenerator.jsx
+  5:37  error  'Download' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\creator\SubscriptionTiers.jsx
+  4:10  error  'Switch' is defined but never used  unused-imports/no-unused-imports
+  5:10  error  'Label' is defined but never used   unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\CategoryPills.jsx
+  2:10  error  'motion' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\FeaturedCarousel.jsx
+  4:10  error  'Link' is defined but never used           unused-imports/no-unused-imports
+  5:10  error  'createPageUrl' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\HeroSection.jsx
+  1:17  error  'useEffect' is defined but never used  unused-imports/no-unused-imports
+  1:36  error  'useState' is defined but never used   unused-imports/no-unused-imports
+  3:16  error  'Volume2' is defined but never used    unused-imports/no-unused-imports
+  3:25  error  'VolumeX' is defined but never used    unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\home\TrendingSection.jsx
+  2:10  error  'motion' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\navigation\FloatingNav.jsx
+  4:25  error  'Library' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\components\ui\checkbox.jsx
+  23:13  error  Parsing error: Identifier 'React' has already been declared
+
+C:\Users\admin\Documents\Jesse\podvault\src\lib\PageNotFound.jsx
+   6:38  error  Unexpected empty object pattern                                  no-empty-pattern
+  38:83  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  38:94  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  52:73  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\CreatorAnalytics.jsx
+  4:101  error  'PieChart' is defined but never used     unused-imports/no-unused-imports
+  4:111  error  'Pie' is defined but never used          unused-imports/no-unused-imports
+  4:116  error  'Cell' is defined but never used         unused-imports/no-unused-imports
+  5:68   error  'ChevronDown' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\EpisodePlayer.jsx
+   5:57  error  'Volume2' is defined but never used          unused-imports/no-unused-imports
+  11:8   error  'EpisodeFeedback' is defined but never used  unused-imports/no-unused-imports
+  13:10  error  'Button' is defined but never used           unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\GroupSession.jsx
+  6:10  error  'Textarea' is defined but never used  unused-imports/no-unused-imports
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\Search.jsx
+    8:10   error  'Input' is defined but never used                                unused-imports/no-unused-imports
+  124:93   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  124:101  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\admin\Documents\Jesse\podvault\src\pages\Settings.jsx
+  2:10  error  'useQuery' is defined but never used  unused-imports/no-unused-imports
+  5:10  error  'Switch' is defined but never used    unused-imports/no-unused-imports
+
+Γ£û 31 problems (31 errors, 0 warnings)
+  24 errors and 0 warnings potentially fixable with the `--fix` option.
+

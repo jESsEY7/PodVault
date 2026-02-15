@@ -1,0 +1,27 @@
+{
+    "name": "ChatMessage",
+    "type": "object",
+    "properties": {
+        "session_id": {
+            "type": "string",
+            "description": "Listening session ID"
+        },
+        "user_name": {
+            "type": "string"
+        },
+        "user_avatar": {
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "required": [
+        "session_id",
+        "message"
+    ]
+}

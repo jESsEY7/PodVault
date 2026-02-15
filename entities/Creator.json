@@ -1,0 +1,54 @@
+{
+    "name": "Creator",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Creator display name"
+        },
+        "bio": {
+            "type": "string",
+            "description": "Creator biography"
+        },
+        "avatar_url": {
+            "type": "string",
+            "description": "Profile photo URL"
+        },
+        "cover_url": {
+            "type": "string",
+            "description": "Cover/banner image URL"
+        },
+        "categories": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Creator's content categories"
+        },
+        "follower_count": {
+            "type": "number",
+            "default": 0
+        },
+        "social_links": {
+            "type": "object",
+            "properties": {
+                "twitter": {
+                    "type": "string"
+                },
+                "instagram": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                }
+            }
+        },
+        "is_verified": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "name"
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "ListeningSession",
+    "type": "object",
+    "properties": {
+        "episode_id": {
+            "type": "string"
+        },
+        "host_user_id": {
+            "type": "string"
+        },
+        "host_name": {
+            "type": "string"
+        },
+        "session_name": {
+            "type": "string"
+        },
+        "current_timestamp": {
+            "type": "number",
+            "description": "Current playback position in seconds"
+        },
+        "is_active": {
+            "type": "boolean",
+            "default": true
+        },
+        "participant_count": {
+            "type": "number",
+            "default": 0
+        },
+        "start_time": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "required": [
+        "episode_id",
+        "session_name"
+    ]
+}

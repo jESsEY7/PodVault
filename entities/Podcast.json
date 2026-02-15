@@ -1,0 +1,68 @@
+{
+    "name": "Podcast",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Podcast show title"
+        },
+        "description": {
+            "type": "string",
+            "description": "Show description"
+        },
+        "cover_image": {
+            "type": "string",
+            "description": "Cover art URL"
+        },
+        "creator_name": {
+            "type": "string",
+            "description": "Creator/host name"
+        },
+        "creator_avatar": {
+            "type": "string",
+            "description": "Creator avatar URL"
+        },
+        "category": {
+            "type": "string",
+            "enum": [
+                "culture",
+                "technology",
+                "business",
+                "wellness",
+                "entertainment",
+                "education",
+                "storytelling",
+                "sports"
+            ],
+            "description": "Podcast category"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Content tags"
+        },
+        "subscriber_count": {
+            "type": "number",
+            "default": 0
+        },
+        "is_featured": {
+            "type": "boolean",
+            "default": false
+        },
+        "tier": {
+            "type": "string",
+            "enum": [
+                "free",
+                "premium"
+            ],
+            "default": "free"
+        }
+    },
+    "required": [
+        "title",
+        "creator_name",
+        "category"
+    ]
+}
