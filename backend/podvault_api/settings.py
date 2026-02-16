@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,6 +131,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Whitenoise configuration
+STORAGES = {
+    "default": {
+        "BACKEND": "podvault_api.storage_backends.BunnyStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # Celery Configuration
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
@@ -182,12 +195,5 @@ BUNNY_STORAGE_PASSWORD = os.getenv('BUNNY_STORAGE_PASSWORD')
 BUNNY_PULL_ZONE_URL = os.getenv('BUNNY_PULL_ZONE_URL')
 BUNNY_STORAGE_REGION = os.getenv('BUNNY_STORAGE_REGION', 'de')
 
-STORAGES = {
-    "default": {
-        "BACKEND": "podvault_api.storage_backends.BunnyStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
+
 
