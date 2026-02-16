@@ -175,3 +175,19 @@ PODCAST_INDEX_KEY = os.getenv('PODCAST_INDEX_KEY', '')
 PODCAST_INDEX_SECRET = os.getenv('PODCAST_INDEX_SECRET', '')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
 SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI', 'http://localhost:8000/api/ingest/spotify/callback')
+
+# Bunny.net Storage Configuration
+BUNNY_STORAGE_ZONE_NAME = os.getenv('BUNNY_STORAGE_ZONE_NAME')
+BUNNY_STORAGE_PASSWORD = os.getenv('BUNNY_STORAGE_PASSWORD')
+BUNNY_PULL_ZONE_URL = os.getenv('BUNNY_PULL_ZONE_URL')
+BUNNY_STORAGE_REGION = os.getenv('BUNNY_STORAGE_REGION', 'de')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "podvault_api.storage_backends.BunnyStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+

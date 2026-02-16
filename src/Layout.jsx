@@ -18,7 +18,7 @@ export default function Layout({ children, currentPageName }) {
           --cream: #F5F0EA;
         }
       `}</style>
-            <VaultOrganizer />
+            {/* <VaultOrganizer /> */}
             {children}
             <FloatingNav currentPage={currentPageName} onSearchClick={() => setShowSearch(true)} />
             <SemanticSearchOverlay isOpen={showSearch} onClose={() => setShowSearch(false)} />
