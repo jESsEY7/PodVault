@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt gunicorn whitenoise
 
 # Copy backend code
 COPY backend/ .
-COPY .env.example .env
+
 
 # Copy built frontend assets to Django's staticfiles directory (or where whitenoise serves them)
 # Note: Users usually serve frontend separately or via Django. 
