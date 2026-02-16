@@ -134,14 +134,24 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Whitenoise configuration
+# Whitenoise configuration
 STORAGES = {
     "default": {
-        "BACKEND": "podvault_api.storage_backends.BunnyStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+if os.getenv('BUNNY_STORAGE_ZONE_NAME'):
+    STORAGES["default"]["BACKEND"] = "podvault_api.storage_backends.BunnyStorage"
+
+# Add React build directory to static files
+REACT_BUILD_DIR = BASE_DIR / "static" / "react_build"
+if REACT_BUILD_DIR.exists():
+    STATICFILES_DIRS = [REACT_BUILD_DIR]
+
 
 
 # Celery Configuration
