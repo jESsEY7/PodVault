@@ -30,6 +30,10 @@ def transcribe_episode_task(episode_id):
     Background task to transcribe an episode using AI (Whisper).
     """
     from ingest.services.ai_service import AIService
+    import requests
+    import tempfile
+    import os
+    
     print(f"[Celery] transcribe_episode_task called for episode {episode_id}")
     try:
         episode = Episode.objects.get(id=episode_id)
@@ -38,17 +42,55 @@ def transcribe_episode_task(episode_id):
 
         service = AIService()
         
-        if episode.audio_file:
-            print(f"Starting transcription for: {episode.title} (File: {episode.audio_file.path})")
-            transcript = service.transcribe_audio(episode.audio_file.path)
-        else:
+        if not episode.audio_file:
              print(f"Skipping transcription for {episode.title}: No audio file.")
              return "No audio file available."
 
-        episode.transcript_content = transcript
-        episode.save()
+        # Handle remote vs local files
+        file_path = None
+        temp_file = None
         
-        return f"Successfully transcribed: {episode.title}"
+        try:
+            # Check if storage is local filesystem
+            if hasattr(episode.audio_file.storage, 'path'):
+                try:
+                    file_path = episode.audio_file.path
+                except NotImplementedError:
+                    # Fallback for custom storage that looks local but isn't
+                    pass
+            
+            # If not local, download to temp file
+            if not file_path:
+                print(f"[Transcription] Downloading remote file for processing: {episode.title}")
+                url = episode.audio_file.url
+                
+                # Create temp file
+                # Suffix .mp3 helps potential format detection
+                temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+                file_path = temp_file.name
+                
+                # Stream download
+                with requests.get(url, stream=True) as r:
+                    r.raise_for_status()
+                    for chunk in r.iter_content(chunk_size=8192):
+                        temp_file.write(chunk)
+                temp_file.close()
+                print(f"[Transcription] Downloaded to temp file: {file_path}")
+
+            print(f"Starting transcription for: {episode.title} (File: {file_path})")
+            transcript = service.transcribe_audio(file_path)
+
+            episode.transcript_content = transcript
+            episode.save()
+            
+            return f"Successfully transcribed: {episode.title}"
+
+        finally:
+            # Cleanup temp file if created
+            if temp_file and file_path and os.path.exists(file_path):
+                os.unlink(file_path)
+                print(f"[Transcription] Cleaned up temp file: {file_path}")
+
     except Episode.DoesNotExist:
         return f"Episode {episode_id} not found."
     except Exception as e:
