@@ -8,7 +8,7 @@ feedparser
 celery
 redis
 django-celery-results
-python-dotenv
 openai
 channels
+daphne
 djangorestframework-simplejwt

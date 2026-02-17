@@ -68,7 +68,7 @@ export default function FloatingNav({ currentPage, onSearchClick }) {
                                 <motion.div
                                     initial={isMobile ? { opacity: 0, height: 0 } : false}
                                     animate={{ opacity: 1, height: 'auto' }}
-                                    exit={isMobile ? { opacity: 0, height: 0 } : false}
+                                    exit={isMobile ? { opacity: 0, height: 0 } : {}}
                                     className={`flex ${isMobile ? 'flex-col gap-2 pt-4 min-w-[200px]' : 'flex-row items-center gap-1'}`}
                                 >
                                     {navItems.map(({ icon: Icon, label, page }) => {
