@@ -31,6 +31,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+# Add React build directory to static files
+REACT_BUILD_DIR = BASE_DIR / "static" / "react_build"
+if REACT_BUILD_DIR.exists():
+    STATICFILES_DIRS = [REACT_BUILD_DIR]
+
 
 # Application definition
 
@@ -75,7 +80,7 @@ ROOT_URLCONF = 'podvault_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [REACT_BUILD_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,10 +158,7 @@ STORAGES = {
 if os.getenv('BUNNY_STORAGE_ZONE_NAME'):
     STORAGES["default"]["BACKEND"] = "podvault_api.storage_backends.BunnyStorage"
 
-# Add React build directory to static files
-REACT_BUILD_DIR = BASE_DIR / "static" / "react_build"
-if REACT_BUILD_DIR.exists():
-    STATICFILES_DIRS = [REACT_BUILD_DIR]
+
 
 
 
