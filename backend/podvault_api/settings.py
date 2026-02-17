@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-c9asdyoqrk4h*^mylh!1$new#m!b#+r$h#!!og&en#v+b@^*0(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = (os.getenv('ALLOWED_HOSTS') or os.getenv('ALLOWED_HOST') or 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = ["*"]
 
 # Add React build directory to static files
 REACT_BUILD_DIR = BASE_DIR / "static" / "react_build"
