@@ -12,3 +12,5 @@ openai
 channels
 daphne
 djangorestframework-simplejwt
+
+boto3

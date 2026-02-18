@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { createPageUrl } from '../utils/index';
 
 const ShowCarousel = ({ title, shows, to }) => {
     return (
@@ -17,7 +18,7 @@ const ShowCarousel = ({ title, shows, to }) => {
             {/* The Spotify-style Horizontal Scroll */}
             <div className="flex space-x-6 overflow-x-auto px-6 pb-4 scrollbar-hide snap-x">
                 {shows.map((show) => (
-                    <Link to={`/podcast/${show.id}`} key={show.id} className="flex-shrink-0 w-48 snap-start group cursor-pointer block">
+                    <Link to={createPageUrl(`PodcastDetail?id=${show.id}`)} key={show.id} className="flex-shrink-0 w-48 snap-start group cursor-pointer block">
                         <div className="relative aspect-square mb-3 overflow-hidden rounded-lg shadow-lg bg-zinc-800">
                             <img
                                 src={show.image_url || show.cover_url || show.cover_image}

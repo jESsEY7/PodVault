@@ -36,6 +36,8 @@ class PodcastIndexClient:
         }
         return headers
 
+
+
     def search_by_term(self, term):
         """
         Searches for podcasts by term.
@@ -49,6 +51,17 @@ class PodcastIndexClient:
         except requests.exceptions.RequestException as e:
             print(f"Error querying Podcast Index: {e}")
             return None
+
+    def search_episodes(self, query):
+        """
+        Searches for episodes matching the query.
+        For now, this searches for Feeds matching the term, as the 'search/byterm' endpoint returns feeds.
+        To find specific episodes, we would need to iterate feeds or use a paid/higher tier endpoint if available.
+        This provides a 'related podcasts' discovery feature.
+        """
+        return self.search_by_term(query)
+
+
 
     def get_trending(self):
         """

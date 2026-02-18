@@ -49,7 +49,17 @@ Return JSON format:
                 }
             });
 
-            setClip(clipData);
+            // InvokeLLM may return a string instead of parsed JSON
+            const parsed = typeof clipData === 'string'
+                ? (() => { try { return JSON.parse(clipData); } catch { return null; } })()
+                : clipData;
+
+            if (!parsed || typeof parsed !== 'object') {
+                toast.error('Could not parse clip data');
+                return;
+            }
+
+            setClip(parsed);
             toast.success('Clip generated!');
         } catch (error) {
             toast.error('Failed to generate clip');
@@ -60,7 +70,7 @@ Return JSON format:
 
     const shareToSocial = (platform) => {
         if (!clip) return;
-        const text = `${clip.hook_title}\n\n${clip.summary}\n\n${clip.hashtags.join(' ')}`;
+        const text = `${clip.hook_title || ''}\n\n${clip.summary || ''}\n\n${(clip.hashtags || []).join(' ')}`;
         const url = window.location.href;
 
         const shareUrls = {
@@ -74,7 +84,7 @@ Return JSON format:
 
     const copyToClipboard = () => {
         if (!clip) return;
-        const text = `${clip.hook_title}\n\n${clip.summary}\n\nListen: ${window.location.href}\n\n${clip.hashtags.join(' ')}`;
+        const text = `${clip.hook_title || ''}\n\n${clip.summary || ''}\n\nListen: ${window.location.href}\n\n${(clip.hashtags || []).join(' ')}`;
         navigator.clipboard.writeText(text);
         setCopied(true);
         toast.success('Copied to clipboard');
@@ -134,7 +144,7 @@ Return JSON format:
                                 <p className="text-sm text-[#F5F0EA]/70 mb-3">{clip.summary}</p>
 
                                 <div className="flex flex-wrap gap-2 mb-3">
-                                    {clip.hashtags.map((tag, i) => (
+                                    {(clip.hashtags || []).map((tag, i) => (
                                         <span key={i} className="text-xs bg-[#364442]/50 text-[#C2AD90] px-2 py-1 rounded">
                                             {tag}
                                         </span>

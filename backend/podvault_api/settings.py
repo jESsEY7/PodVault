@@ -14,10 +14,14 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -171,6 +175,12 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if os.getenv('CSRF_TRUSTED_ORIGINS') else [
+    'https://mc-7f8atnj8om.bunny.run',
+    'http://localhost:5173',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -209,5 +219,17 @@ BUNNY_STORAGE_PASSWORD = os.getenv('BUNNY_STORAGE_PASSWORD')
 BUNNY_PULL_ZONE_URL = os.getenv('BUNNY_PULL_ZONE_URL')
 BUNNY_STORAGE_REGION = os.getenv('BUNNY_STORAGE_REGION', 'de')
 
+# Rumble Integration Configuration
+RUMBLE_API_KEY = os.getenv('RUMBLE_API_KEY')
+RUMBLE_S3_ENDPOINT = os.getenv('RUMBLE_S3_ENDPOINT', 'https://s3.rumble.com')
+RUMBLE_ACCESS_KEY_ID = os.getenv('RUMBLE_ACCESS_KEY_ID')
+RUMBLE_SECRET_ACCESS_KEY = os.getenv('RUMBLE_SECRET_ACCESS_KEY')
+RUMBLE_MASTER_BUCKET = os.getenv('RUMBLE_MASTER_BUCKET', 'podvault-masters')
 
 
+
+
+
+# Ingestion API Keys
+MEDIASTACK_API_KEY = os.getenv('MEDIASTACK_API_KEY', '')
+NPR_API_KEY = os.getenv('NPR_API_KEY', '')

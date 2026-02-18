@@ -16,16 +16,19 @@ export default function Home() {
     const [activeCategory, setActiveCategory] = useState('All');
 
     // Fetch Data using React Query
+
     const { data: podcastsData, isLoading: loadingPodcasts } = useQuery({
         queryKey: ['podcasts', activeCategory],
         queryFn: async () => {
             if (activeCategory === 'All') {
-                return apiClient.Podcast.list(); // Fetch all
-            } else {
-                return apiClient.Podcast.filter({ category: activeCategory });
+                return apiClient.Podcast.list();
             }
+            // All category pills (News, Technology, Business, etc.)
+            // are matched by slug on the backend
+            return apiClient.Podcast.filter({ category: activeCategory });
         }
     });
+
 
     const { data: trendingData, isLoading: loadingTrending } = useQuery({
         queryKey: ['trending'],
