@@ -15,8 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
-from .views import index
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +27,6 @@ urlpatterns = [
     path('api/v1/sync/', include('sync.urls')),
     path('api/v1/creator/', include('creator.urls')),
     path('api/v1/payouts/', include('payouts.urls')),
-    re_path(r'^.*$', index), # Catch-all for React frontend
+
 ]
 
