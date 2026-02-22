@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  # Server-side token invalidation on logout
     
     # Local Apps
     'users',
@@ -64,7 +65,8 @@ INSTALLED_APPS = [
     'sync',
     'creator',
     'clubs',
-    'payouts', # Added payouts app
+    'payouts',
+    'podcasts',  # Multi-provider podcast integration layer
 ]
 
 MIDDLEWARE = [
@@ -203,7 +205,6 @@ SIMPLE_JWT = {
 
 
 # Spotify API Configuration
-
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID', '')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET', '')
 
@@ -211,6 +212,39 @@ SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET', '')
 PODCAST_INDEX_KEY = os.getenv('PODCAST_INDEX_KEY', '')
 PODCAST_INDEX_SECRET = os.getenv('PODCAST_INDEX_SECRET', '')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
+
+# ---------------------------------------------------------------------------
+# Podcast Provider Integration
+# ---------------------------------------------------------------------------
+
+# Redis Cache-Aside for podcast search results and hydrated detail objects.
+# Uses DB 1 so it is isolated from Celery's broker (DB 0).
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # Don't raise on Redis connection errors — fall through to the API
+            "IGNORE_EXCEPTIONS": True,
+        },
+        "KEY_PREFIX": "podvault",
+    }
+}
+
+# TTL for cached podcast search / detail results (seconds).  Default: 24 h.
+PODCAST_CACHE_TTL  = int(os.getenv("PODCAST_CACHE_TTL",  86400))  # 24 h — main Redis TTL
+PODCAST_FRESH_TTL  = int(os.getenv("PODCAST_FRESH_TTL",  3600))   #  1 h — SWR sentinel TTL
+
+# Taddy GraphQL API
+TADDY_API_KEY  = os.getenv("TADDY_API_KEY", "")
+TADDY_USER_ID  = os.getenv("TADDY_USER_ID", "")
+
+# Podchaser API — credential pairs for OAuth 2.0 Client Credentials + automatic rotation.
+# Format: comma-separated key:secret pairs.
+# Example: PODCHASER_CREDENTIALS=key1:secret1,key2:secret2
+# The provider exchanges each pair for a Bearer token (valid 1 year) cached in Redis.
+PODCHASER_CREDENTIALS = os.getenv("PODCHASER_CREDENTIALS", "")
 SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI', 'http://localhost:8000/api/ingest/spotify/callback')
 
 # Bunny.net Storage Configuration

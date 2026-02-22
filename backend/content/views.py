@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.db.models import Q
 from django.http import StreamingHttpResponse, HttpResponse, FileResponse
-from .models import Podcast, Episode, Category
-from .serializers import PodcastSerializer, EpisodeSerializer, CategorySerializer
+from .models import Podcast, Episode, Category, Like, Follow, Playlist, Tip, Merchandise, CreatorSubscription
+from .serializers import PodcastSerializer, EpisodeSerializer, CategorySerializer, LikeSerializer, FollowSerializer, PlaylistSerializer, TipSerializer, MerchandiseSerializer, CreatorSubscriptionSerializer
 import requests
 
 class PodcastViewSet(viewsets.ModelViewSet):
@@ -201,3 +201,161 @@ class CreatorViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     search_fields = ['username']
+class LikeViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing user likes on episodes"""
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at']
+    ordering = ['-created_at']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by episode if provided
+        episode_id = self.request.query_params.get('episode_id')
+        if episode_id:
+            queryset = queryset.filter(episode_id=episode_id)
+
+        # Filter by user if provided (handling both user_id and created_by from frontend)
+        user_id = self.request.query_params.get('user_id')
+        if not user_id:
+            user_id = self.request.query_params.get('created_by')
+            
+        if user_id and user_id.strip():
+            try:
+                queryset = queryset.filter(user_id=user_id)
+            except ValueError:
+                # Handle cases where created_by might be an empty string or invalid ID
+                pass
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class FollowViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing user follows on podcasts"""
+    queryset = Follow.objects.all()
+    serializer_class = FollowSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at']
+    ordering = ['-created_at']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by podcast if provided
+        podcast_id = self.request.query_params.get('podcast_id')
+        if podcast_id:
+            queryset = queryset.filter(podcast_id=podcast_id)
+
+        # Filter by user if provided (handling both user_id and created_by from frontend)
+        user_id = self.request.query_params.get('user_id')
+        if not user_id:
+            user_id = self.request.query_params.get('created_by')
+
+        if user_id and user_id.strip():
+            try:
+                queryset = queryset.filter(user_id=user_id)
+            except ValueError:
+                pass
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class PlaylistViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing user playlists"""
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['created_at', 'updated_at']
+    ordering = ['-created_at']
+    search_fields = ['name', 'description']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # If user wants only their own playlists
+        if self.request.query_params.get('mine'):
+            queryset = queryset.filter(user=self.request.user)
+        # Public playlists by default
+        elif not self.request.user.is_authenticated:
+            queryset = queryset.filter(is_public=True)
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class TipViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing supporter tips"""
+    queryset = Tip.objects.all()
+    serializer_class = TipSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at', 'amount']
+    ordering = ['-created_at']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by recipient (creator)
+        recipient_id = self.request.query_params.get('recipient_id')
+        if recipient_id:
+            queryset = queryset.filter(recipient_id=recipient_id)
+        # Filter by sender
+        sender_id = self.request.query_params.get('sender_id')
+        if sender_id:
+            queryset = queryset.filter(sender_id=sender_id)
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(sender=self.request.user)
+
+class MerchandiseViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing creator merchandise"""
+    queryset = Merchandise.objects.all()
+    serializer_class = MerchandiseSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['created_at', 'price']
+    ordering = ['-created_at']
+    search_fields = ['name', 'description']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by creator
+        creator_id = self.request.query_params.get('creator_id')
+        if creator_id:
+            queryset = queryset.filter(creator_id=creator_id)
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
+
+class CreatorSubscriptionViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing creator subscriptions"""
+    queryset = CreatorSubscription.objects.all()
+    serializer_class = CreatorSubscriptionSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at', 'amount']
+    ordering = ['-created_at']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter by creator
+        creator_id = self.request.query_params.get('creator_id')
+        if creator_id:
+            queryset = queryset.filter(creator_id=creator_id)
+        # Filter by subscriber
+        subscriber_id = self.request.query_params.get('subscriber_id')
+        if subscriber_id:
+            queryset = queryset.filter(subscriber_id=subscriber_id)
+        return queryset
+    
+    def perform_create(self, serializer):
+        # Default to current user as subscriber
+        if 'subscriber' not in self.request.data:
+            serializer.save(subscriber=self.request.user)
+        else:
+            serializer.save()

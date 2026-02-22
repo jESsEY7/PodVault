@@ -14,3 +14,5 @@ daphne
 djangorestframework-simplejwt
 
 boto3
+django-redis>=5.4
+gql[requests]>=3.4

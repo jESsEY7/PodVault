@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
-import { Home, Compass, Settings, Music, Search, Menu, X } from 'lucide-react';
+import { Home, Compass, Settings, Music, Search, Menu, X, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../lib/AuthContext';
 
 const navItems = [
     { icon: Home, label: 'Home', page: 'Home' },
@@ -13,10 +14,18 @@ const navItems = [
 ];
 
 export default function FloatingNav({ currentPage, onSearchClick }) {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+
+    const handleLogout = () => {
+        setIsMobileMenuOpen(false);
+        logout();
+        navigate('/Login', { replace: true });
+    };
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -121,6 +130,14 @@ export default function FloatingNav({ currentPage, onSearchClick }) {
                                             </Link>
                                         );
                                     })}
+                                    {/* Logout button — always last item */}
+                                    <button
+                                        onClick={handleLogout}
+                                        className={`relative flex ${isMobile ? 'flex-row gap-3 w-full px-4 py-3' : 'flex-col px-4 py-2'} items-center rounded-xl transition-all duration-300 group hover:bg-red-500/10 text-[#F5F0EA]/40 hover:text-red-400`}
+                                    >
+                                        <LogOut className="w-5 h-5" />
+                                        <span className={`text-[10px] ${isMobile ? 'text-sm font-medium' : 'mt-1'}`}>Sign Out</span>
+                                    </button>
                                 </motion.div>
                             )}
                         </AnimatePresence>

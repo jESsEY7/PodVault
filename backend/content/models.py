@@ -33,6 +33,103 @@ class Podcast(models.Model):
     def __str__(self):
         return self.title
 
+class Like(models.Model):
+    """User likes for episodes"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='likes')
+    episode = models.ForeignKey('Episode', on_delete=models.CASCADE, related_name='liked_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'episode')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user} likes {self.episode.title}"
+
+class Follow(models.Model):
+    """User follows for podcasts"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='follows')
+    podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, related_name='followers')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'podcast')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user} follows {self.podcast.title}"
+
+class Playlist(models.Model):
+    """User-created playlists"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='playlists')
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    episodes = models.ManyToManyField('Episode', related_name='in_playlists', blank=True)
+    is_public = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return self.name
+
+class Tip(models.Model):
+    """Supporter tips for creators"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='tips_sent')
+    recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tips_received')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='KES')
+    message = models.TextField(blank=True)
+    episode = models.ForeignKey('Episode', on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Tip of {self.amount} {self.currency} to {self.recipient.username}"
+
+class Merchandise(models.Model):
+    """Creator merchandise"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='merchandise')
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='KES')
+    image_url = models.URLField(blank=True)
+    external_url = models.URLField(blank=True, help_text="Link to purchase")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return self.name
+
+class CreatorSubscription(models.Model):
+    """Creator subscription tiers"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='subscriptions')
+    subscriber = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='subscribed_to')
+    tier = models.CharField(max_length=50, blank=True, help_text="e.g., 'Pro', 'VIP'")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='KES')
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ('creator', 'subscriber')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.subscriber.username} subscribed to {self.creator.username}"
 class Person(models.Model):
     name = models.CharField(max_length=255)
     image_url = models.URLField(null=True, blank=True)

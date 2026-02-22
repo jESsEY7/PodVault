@@ -60,17 +60,26 @@ export default function EnhancedEpisodePlayer({ episode, onClose }) {
                 }
             });
         } else {
-            getAudioSrc().then(src => {
-                if (!mounted) return;
+            // If this is an RSS episode (no DB record), use audio_url directly
+            // so we don't hit a non-existent /episodes/rss-N/audio/ proxy endpoint.
+            const isRssEpisode = String(episode.id).startsWith('rss-');
 
-                // If we have an offline blob, use it.
-                // Otherwise, use the Django Proxy URL which handles CORS and fallbacks.
-                const proxyUrl = `${axiosInstance.defaults.baseURL}/episodes/${episode.id}/audio/`;
-                const finalSrc = (src && src.startsWith('blob:')) ? src : proxyUrl;
+            if (isRssEpisode && episode.audio_url) {
+                console.log('[ImmersivePlayer] Source: RSS direct URL');
+                setAudioSrc(episode.audio_url);
+            } else {
+                getAudioSrc().then(src => {
+                    if (!mounted) return;
 
-                console.log('[ImmersivePlayer] Source:', finalSrc.startsWith('blob:') ? 'Vault (Offline)' : 'Django Proxy (CORS-Safe)');
-                setAudioSrc(finalSrc);
-            });
+                    // If we have an offline blob, use it.
+                    // Otherwise, use the Django Proxy URL which handles CORS and fallbacks.
+                    const proxyUrl = `${axiosInstance.defaults.baseURL}/episodes/${episode.id}/audio/`;
+                    const finalSrc = (src && src.startsWith('blob:')) ? src : proxyUrl;
+
+                    console.log('[ImmersivePlayer] Source:', finalSrc.startsWith('blob:') ? 'Vault (Offline)' : 'Django Proxy (CORS-Safe)');
+                    setAudioSrc(finalSrc);
+                });
+            }
         }
 
         return () => { mounted = false; };

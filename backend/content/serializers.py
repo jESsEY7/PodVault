@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Podcast, Episode, Category, Person
+from .models import Podcast, Episode, Category, Person, Like, Follow, Playlist, Tip, Merchandise, CreatorSubscription
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,3 +45,60 @@ class PodcastSerializer(serializers.ModelSerializer):
 
     def get_tags(self, obj):
         return ["Trending", "New"] # Dummy implementation for now
+
+class LikeSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    episode_title = serializers.CharField(source='episode.title', read_only=True)
+    
+    class Meta:
+        model = Like
+        fields = ['id', 'user', 'username', 'episode', 'episode_title', 'created_at']
+        read_only_fields = ['user', 'created_at']
+
+class FollowSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    podcast_title = serializers.CharField(source='podcast.title', read_only=True)
+    
+    class Meta:
+        model = Follow
+        fields = ['id', 'user', 'username', 'podcast', 'podcast_title', 'created_at']
+        read_only_fields = ['user', 'created_at']
+
+class PlaylistSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    episode_count = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Playlist
+        fields = ['id', 'user', 'username', 'name', 'description', 'episodes', 'is_public', 'episode_count', 'created_at', 'updated_at']
+        read_only_fields = ['user', 'created_at', 'updated_at']
+    
+    def get_episode_count(self, obj):
+        return obj.episodes.count()
+
+class TipSerializer(serializers.ModelSerializer):
+    sender_username = serializers.CharField(source='sender.username', read_only=True)
+    recipient_username = serializers.CharField(source='recipient.username', read_only=True)
+    episode_title = serializers.CharField(source='episode.title', read_only=True)
+    
+    class Meta:
+        model = Tip
+        fields = ['id', 'sender', 'sender_username', 'recipient', 'recipient_username', 'amount', 'currency', 'message', 'episode', 'episode_title', 'created_at']
+        read_only_fields = ['sender', 'created_at']
+
+class MerchandiseSerializer(serializers.ModelSerializer):
+    creator_username = serializers.CharField(source='creator.username', read_only=True)
+    
+    class Meta:
+        model = Merchandise
+        fields = ['id', 'creator', 'creator_username', 'name', 'description', 'price', 'currency', 'image_url', 'external_url', 'created_at', 'updated_at']
+        read_only_fields = ['creator', 'created_at', 'updated_at']
+
+class CreatorSubscriptionSerializer(serializers.ModelSerializer):
+    creator_username = serializers.CharField(source='creator.username', read_only=True)
+    subscriber_username = serializers.CharField(source='subscriber.username', read_only=True)
+    
+    class Meta:
+        model = CreatorSubscription
+        fields = ['id', 'creator', 'creator_username', 'subscriber', 'subscriber_username', 'tier', 'amount', 'currency', 'active', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']

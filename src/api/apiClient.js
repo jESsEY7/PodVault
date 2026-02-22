@@ -350,6 +350,13 @@ export const apiClient = {
             const response = await axiosInstance.post('/auth/login/', credentials);
             return response.data;
         },
+        register: async ({ username, email, password, confirm_password }) => {
+            if (USE_MOCK_DATA) {
+                return { access: 'mock-token', refresh: 'mock-refresh', user: { ...MOCK_DATA.user, username, email } };
+            }
+            const response = await axiosInstance.post('/auth/register/', { username, email, password, confirm_password });
+            return response.data;
+        },
         updateMe: async (data) => {
             if (USE_MOCK_DATA) {
                 return { ...MOCK_DATA.user, ...data };
@@ -357,9 +364,14 @@ export const apiClient = {
             const response = await axiosInstance.patch('/auth/me/', data);
             return response.data;
         },
-        logout: async () => {
-            // Implementation depends on backend logout strategy
+        logout: async (refreshToken) => {
+            if (refreshToken) {
+                try {
+                    await axiosInstance.post('/auth/logout/', { refresh: refreshToken });
+                } catch { /* ignore backend errors */ }
+            }
             localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
         },
         connectSpotify: async () => {
             if (USE_MOCK_DATA) {

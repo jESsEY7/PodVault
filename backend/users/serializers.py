@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserActivity
+from .models import UserActivity, UserPreference
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -32,6 +32,11 @@ class UserActivitySerializer(serializers.ModelSerializer):
         if instance.metadata:
             ret['text'] = instance.metadata.get('text', '')
         return ret
-        return ret
 
-
+class UserPreferenceSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    
+    class Meta:
+        model = UserPreference
+        fields = ['id', 'user', 'username', 'interest_vector', 'last_updated']
+        read_only_fields = ['user', 'last_updated']

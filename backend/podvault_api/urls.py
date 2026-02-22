@@ -28,5 +28,8 @@ urlpatterns = [
     path('api/v1/creator/', include('creator.urls')),
     path('api/v1/payouts/', include('payouts.urls')),
 
+    # Podcast multi-provider integration (iTunes, Taddy, Podchaser)
+    path('api/v1/podcasts/', include('podcasts.urls', namespace='podcasts')),
+
 ]
 
